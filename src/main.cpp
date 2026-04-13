@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 
 #include "stb_image.h"
 #include "stb_image_write.h"
@@ -56,12 +57,14 @@ int main()
                 );
             }
 
-            // Save chunk
-            std::string filename = "Output Images/chunk_" + 
-                std::to_string(chunkX++) + ".png";
+            std::string filename = "Output Images/chunk_" +
+                std::to_string(y / chunkSize) + "_" +
+                std::to_string(x / chunkSize) + ".png";
             
             stbi_write_png(filename.c_str(), chunkSize, chunkSize, 
                 channels, chunk, chunkSize * channels);
+
+            chunkX++;
 
             delete[] chunk;
         }
